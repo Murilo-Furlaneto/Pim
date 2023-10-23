@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pim/src/config/repositories/user_repository.dart';
 import 'package:pim/src/model/funcionario_model.dart';
-import 'package:pim/src/repositories/user_repository.dart';
 
-class UserProvider extends ChangeNotifier {
-  UserRepository repository = UserRepository();
-  List<FuncionarioModel> usuarios = [];
+class UserProvider with ChangeNotifier {
+  final UserRepository _repository = UserRepository();
 
-  List<FuncionarioModel> userList() {
-    return usuarios = repository.userList;
+  List<FuncionarioModel> get usuarios => _repository.userList;
+
+  Future<void> adicionarUsuario(FuncionarioModel user) async {
+    usuarios.add(user);
+    notifyListeners();
   }
 
-  void adicionarUsuario(FuncionarioModel user) {
-    repository.adicionarUsuario(user);
+  void excluirUsuario(FuncionarioModel funcionario) {
+    usuarios.removeWhere((user) => user.codF == funcionario.codF);
     notifyListeners();
   }
 }

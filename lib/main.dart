@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:pim/src/controller/services/app_services.dart';
-import 'package:pim/src/page/cadastrorio_page.dart';
-import 'package:pim/src/page/funcionario_list_page.dart';
-import 'package:pim/src/page/home_page.dart';
-import 'package:pim/src/repositories/user_repository.dart';
+import 'package:pim/src/controller/provider/theme_provider.dart';
+import 'package:pim/src/controller/provider/user_provider.dart';
+import 'package:pim/src/page/home/home_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    MultiProvider(providers: [
-      Provider<UserRepository>(create: (_) => UserRepository()),
-      Provider<AppServices>(create: (_) => AppServices())
-    ], child: const MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+        ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Projeto PIM',
-      theme: ThemeData(),
-      home: HomePage(),
+      theme: themeProvider.isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      home: const HomePage(),
     );
   }
 }

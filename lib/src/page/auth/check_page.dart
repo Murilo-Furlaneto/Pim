@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pim/src/page/home_page.dart';
-import 'package:pim/src/page/login_page.dart';
-import 'package:pim/src/repositories/user_repository.dart';
+import 'package:pim/src/page/home/home_page.dart';
+import 'package:pim/src/page/auth/login_page.dart';
+import 'package:pim/src/config/repositories/user_repository.dart';
 
 class CheckPage extends StatefulWidget {
   const CheckPage({super.key});
@@ -26,7 +26,7 @@ class _CheckPageState extends State<CheckPage> {
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       });
     } else {

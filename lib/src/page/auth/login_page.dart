@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pim/src/controller/services/app_services.dart';
-import 'package:pim/src/model/funcionario_model.dart';
-import 'package:pim/src/page/home_page.dart';
-import 'package:pim/src/page/password_page.dart';
-import 'package:pim/src/repositories/user_repository.dart';
+import 'package:pim/src/page/home/home_page.dart';
+import 'package:pim/src/page/auth/password_page.dart';
+import 'package:pim/src/config/repositories/user_repository.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -136,10 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  HomePage()));
+                                                  const HomePage()));
                                     }
                                   } catch (e) {
-                                    print("Error: $e");
+                                    debugPrint("Error: $e");
                                   }
                                 },
                                 child: const Text(

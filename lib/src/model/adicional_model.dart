@@ -12,7 +12,13 @@ class AdicionalModel {
 
   double calcularAdicional(
       double salario, double horasExtra, double decimoTerceiro) {
-     return salario = salario + horasExtra + decimoTerceiro;
+    return salario = salario + horasExtra + decimoTerceiro;
+  }
+
+  double calcularAdicionalDezembro() {
+    // Implemente a lógica para calcular o adicional de dezembro aqui
+    // Você pode usar this.horasExtra e this.decimoTerceiro para fazer o cálculo
+    return horasExtra + decimoTerceiro;
   }
 
   AdicionalModel copyWith({
