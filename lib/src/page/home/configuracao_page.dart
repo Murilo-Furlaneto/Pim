@@ -3,6 +3,7 @@ import 'package:pim/src/config/repositories/user_repository.dart';
 import 'package:pim/src/controller/provider/theme_provider.dart';
 import 'package:pim/src/controller/services/app_services.dart';
 import 'package:pim/src/model/funcionario_model.dart';
+import 'package:pim/src/page/auth/login_page.dart';
 import 'package:provider/provider.dart';
 
 class ConfiguracaoPage extends StatefulWidget {
@@ -20,7 +21,6 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
   final UserRepository repository = UserRepository();
   late FuncionarioModel funcionarioModel;
   int selectedIndex = 0;
-  
 
   @override
   void initState() {
@@ -85,7 +85,10 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
             const SizedBox(height: 15),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
+              },
               child: const Text('Sair'),
             ),
           ],
