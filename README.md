@@ -8,6 +8,9 @@ Para executar o projeto execute o passo a passo:
 4 - Antes de rodar o projeto, configure para rodar na versão Web, caso utilizar o VsCode, clique no canto inferior direito e selecione a opção.
 5 - Após isso digite F5 e rode o projeto
 
+## Telas do Dispositivo
+
+
 ![login](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/35abf930-b8f4-47e0-a723-cd78d3d97a54)
 ![cadastro2](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/1c73df85-2938-4491-a512-7b3e8967c94a)
 ![cadastro1](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/cca8bcfa-65c7-411b-a1c0-b0015fe52ccd)
