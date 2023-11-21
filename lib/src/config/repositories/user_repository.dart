@@ -106,8 +106,6 @@ class UserRepository with ChangeNotifier {
       copiaEndereco: 'Avenida Paulista, 1050- Sao Paulo',
       isGestor: true,
     ),
-
-    // Outros funcionários...
   ]; // Lista de usuários
 
   void excluirUsuario(FuncionarioModel funcionario) {
@@ -125,11 +123,10 @@ class UserRepository with ChangeNotifier {
   }
 
   void vericaUsuarioLista(
-      String nome, String email, String senha, BuildContext context) {
-    bool foundName = userList.contains(nome);
+       String email, String senha, BuildContext context) {
     bool foundEmail = userList.contains(email);
     bool foundSenha = userList.contains(senha);
-    if (foundName && foundEmail && foundSenha) {
+    if (foundEmail && foundSenha) {
       return;
     } else {
       showDialog(
@@ -139,4 +136,14 @@ class UserRepository with ChangeNotifier {
               ));
     }
   }
+
+
+  bool verificarGestor(String email, String senha) {
+    final user = userList.firstWhere(
+      (user) => user.email == email && user.senha == senha,
+    );
+
+    return user.isGestor;
+  }
 }
+

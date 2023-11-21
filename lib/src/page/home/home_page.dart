@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:pim/src/components/home_components.dart';
 import 'package:pim/src/config/repositories/user_repository.dart';
 import 'package:pim/src/controller/provider/user_provider.dart';
-import 'package:pim/src/controller/services/app_services.dart';
 import 'package:pim/src/model/funcionario_model.dart';
 import 'package:pim/src/page/home/cadastro_home.dart';
 import 'package:pim/src/page/home/configuracao_page.dart';
 import 'package:pim/src/page/home/folha_pagamento_page.dart';
 import 'package:pim/src/page/home/funcionario_list_page.dart';
+import 'package:pim/src/page/home/gerador_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.email, required this.senha});
+
+  final String email;
+  final String senha;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,65 +22,94 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late FuncionarioModel? funcionario;
-  final AppServices _appServices = AppServices();
   final UserRepository repository = UserRepository();
   bool isGestor = false;
-  int selectedIndex = 0;
 
-  FuncionarioModel buscarUsuario(int i) {
-    funcionario = repository.userList[i];
-    _appServices.verificaUsurario(funcionario!);
-    return funcionario!;
+  @override
+  void initState() {
+    super.initState();
+    buscarUsuario(widget.email, widget.senha);
+    verificarGestor();
   }
 
-  final List<String> _listaOpcoes = [
+  void verificarGestor() {
+    isGestor = repository.verificarGestor(widget.email, widget.senha);
+  }
+
+  FuncionarioModel buscarUsuario(String email, String senha) {
+    return funcionario = repository.userList.firstWhere(
+      (user) => user.email == email && user.senha == senha,
+    );
+  }
+
+  final List<String> _listaOpcoesGestor = [
     "Cadastrar funcionário",
     "Lista de funcionários",
     "Configurações",
-    "Folha de pagamento",
+    "Holerite",
+    "Gerar folha de pagamento",
   ];
 
-  final List<IconData> _listaIcones = [
+  final List<String> _listaOpcoesFuncionario = [
+    "Lista de funcionários",
+    "Configurações",
+    "Holerite",
+  ];
+
+  final List<IconData> _listaIconesGestor = [
     Icons.person_add,
+    Icons.groups,
+    Icons.settings,
+    Icons.payments,
+    Icons.currency_exchange
+  ];
+
+  final List<IconData> _listaIconesFuncionario = [
     Icons.groups,
     Icons.settings,
     Icons.payments,
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    buscarUsuario(selectedIndex);
-    verificaGestor(funcionario!);
-  }
-
   void navigatorPage(BuildContext context, int index) {
-    List<Widget> navegacao;
-
     final UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
 
-    navegacao = [
-      const CadastroFuncionarioPage(),
-      FuncionarioListPage(),
-      const ConfiguracaoPage(),
-      FolhaPagamentoPage(
-        funcionario: funcionario!,
-      ),
-    ];
+    if (isGestor) {
+      List<Widget> navegacao = [
+        const CadastroFuncionarioPage(),
+        const FuncionarioListPage(),
+        ConfiguracaoPage(
+          funcionarioModel: funcionario!,
+        ),
+        FolhaPagamentoPage(
+          funcionario: funcionario!,
+        ),
+        const GeradorPage(),
+      ];
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => navegacao[index]),
-    );
-  }
-
-  bool verificaGestor(FuncionarioModel funcionario) {
-    if (funcionario.isGestor == true) {
-      print(funcionario.isGestor);
-      return isGestor = true;
+      if (index < navegacao.length) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => navegacao[index]),
+        );
+      }
     } else {
-      return isGestor = false;
+      List<Widget> navegacao = [
+        const FuncionarioListPage(),
+        ConfiguracaoPage(
+          funcionarioModel: funcionario!,
+        ),
+        FolhaPagamentoPage(
+          funcionario: funcionario!,
+        ),
+      ];
+
+      if (index < navegacao.length) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => navegacao[index]),
+        );
+      }
     }
   }
 
@@ -91,31 +123,39 @@ class _HomePageState extends State<HomePage> {
     final double razaoDeAspecto = larguraDeCadaItem / alturaDeCadaItem;
 
     return SafeArea(
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Home Page'),
-            centerTitle: true,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
-            child: GridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 0,
-              childAspectRatio: razaoDeAspecto,
-              children: List.generate(
-                _listaOpcoes.length,
-                (index) {
-                  return HomeComponents(
-                    function: () {
-                      navigatorPage(context, index);
-                    },
-                    icon: _listaIcones[index],
-                    description: _listaOpcoes[index],
-                  );
-                },
-              ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Home Page'),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
+          child: GridView.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 0,
+            childAspectRatio: razaoDeAspecto,
+            children: List.generate(
+              isGestor
+                  ? _listaOpcoesGestor.length
+                  : _listaOpcoesFuncionario.length,
+              (index) {
+                if (index == 4 && !isGestor) {
+                  // Não mostrar "Gerar folha de pagamento" se não for gestor
+                  return const SizedBox.shrink();
+                }
+                return HomeComponents(
+                  function: () {
+                    navigatorPage(context, index);
+                  },
+                  icon: isGestor
+                      ? _listaIconesGestor[index]
+                      : _listaIconesFuncionario[index],
+                  description: isGestor
+                      ? _listaOpcoesGestor[index]
+                      : _listaOpcoesFuncionario[index],
+                );
+              },
             ),
           ),
         ),

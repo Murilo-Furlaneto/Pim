@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pim/src/controller/provider/theme_provider.dart';
 import 'package:pim/src/controller/provider/user_provider.dart';
-import 'package:pim/src/page/home/home_page.dart';
+import 'package:pim/src/page/auth/login_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -18,7 +18,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Projeto PIM',
       theme: themeProvider.isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

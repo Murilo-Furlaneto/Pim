@@ -20,7 +20,5 @@ class HoleriteModel extends DescontosModel {
 
   String get codigoHolerite => _codHolerite;
 
-  void calcularFerias() {}
-
-  void calcularSalario() {}
+ 
 }
