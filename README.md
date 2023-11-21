@@ -1,3 +1,4 @@
+![home_atualizada](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/4b94197e-12fb-4a01-ac91-c7bc2ed92584)
 # pim
 
 Para executar o projeto execute o passo a passo:
@@ -18,4 +19,7 @@ Para executar o projeto execute o passo a passo:
 ![pagamento1](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/cc63aad7-2100-4d14-84b4-5b163d3dd5bb)
 ![login](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/1a94ced1-61fe-464b-b301-23cd6cfd951b)
 ![lista de funcionario](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/27ed3016-6b1e-419f-8d03-cb287c1b296c)
-![home](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/61d608b3-ba96-4702-a602-2c0a80ae23ec)
+![home_atualizada](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/4b94197e-12fb-4a01-ac91-c7bc2ed92584)
+![gerar_folha_pagamento](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/4356ee97-2905-478e-b405-ce085f8dfe4b)
+
+
