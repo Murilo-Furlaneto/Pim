@@ -1,16 +1,51 @@
+PIM - Flutter
+
+Este projeto Flutter é um sistema de gerenciamento de informações de pessoal (PIM) que visa simplificar e organizar o processo de gestão de funcionários em uma empresa. Ele oferece funcionalidades específicas para diferentes níveis de usuário, garantindo que apenas o gerente de RH tenha acesso a informações sensíveis, como geração de folha de pagamento e cadastro de novos funcionários.
+
+Gerente
+    
+    Gerar folha de pagamento dos funcionários.
+
+    Cadastrar novos funcionários no sistema.
+
+Demais funcionários
+
+    Acessar a lista de funcionários da empresa.
+      
+    Visualizar seus próprios holerites.
+
+Tecnologias utilizadas    
+    
+    Flutter
+
+    Dart
+    
+    Provider
+
+Siga os passos abaixo para executar o projeto:
+
+
+    Siga o tutorial de instalação disponível em: https://medium.com/flutter-comunidade-br/instalando-e-configurando-flutter-no-windows-cae74711df1e
+
+
+    Utilize uma IDE como VS Code ou Android Studio.
+
+
+    Abra o terminal na raiz do projeto e execute o comando:
+
+    bash
+    flutter pub get
+
+
+    Se você estiver utilizando o VS Code, clique no canto inferior direito e selecione a opção para rodar na versão Web.
+
+
+    Pressione F5 na IDE para rodar o projeto.
+
+
 ![home_atualizada](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/4b94197e-12fb-4a01-ac91-c7bc2ed92584)
-# pim
-
-Para executar o projeto execute o passo a passo:
-
-1 - Baixe o Flutter e configure, siga o tutorial de instalação: https://medium.com/flutter-comunidade-br/instalando-e-configurando-flutter-no-windows-cae74711df1e
-2 - Após baixar abra o projeto em uma IDE
-3 - No terminal digite o comando "flutter pub get"  para baixar os packages utilizados no projeto
-4 - Antes de rodar o projeto, configure para rodar na versão Web, caso utilizar o VsCode, clique no canto inferior direito e selecione a opção.
-5 - Após isso digite F5 e rode o projeto
 
 ## Telas do Dispositivo
-
 
 ![login](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/35abf930-b8f4-47e0-a723-cd78d3d97a54)
 ![cadastro2](https://github.com/Murilo-Furlaneto/Pim/assets/64844221/1c73df85-2938-4491-a512-7b3e8967c94a)
